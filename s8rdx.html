@@ -1,0 +1,19 @@
+<script type="text/javascript">
+
+function execCallback(callback) {
+var _CIDN = "cid";
+var _PMTN = "p";
+var _LPTU = "./";
+var _param = location.search.substring(1).split("&");
+var _ulp = "", _ulcid = "";
+for(var i = 0; _param[i]; i++){ var kv = _param[i].split("="); if(kv[0] == _PMTN && kv[1].length > 1){ _ulp = kv[1]; } if(kv[0] == _CIDN && kv[1].length > 1){ _ulcid = kv[1]; }}
+if(_ulp && _ulcid){ _xhr = new XMLHttpRequest(); _xhr.open("GET", _LPTU + "lptag.php?p=" + _ulp + "&cid=" + _ulcid); _xhr.send(); }
+callback();
+}
+execCallback(function() {
+var match = RegExp('[?&]' + '__s8url' + '=([^&]*)').exec(window.location.search);
+var s8url = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+location.href = s8url;
+});
+</script>
+
